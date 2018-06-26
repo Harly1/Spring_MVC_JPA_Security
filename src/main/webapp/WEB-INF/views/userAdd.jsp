@@ -14,22 +14,21 @@
 
     <tr>
 
-        <td><%--@declare id="login"--%><label for="login">login: </label>
-        <input type="text" name="login" size="45" value="<c:out value='${user.login}'/>"/>
+        <td>
+         login:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <input type="text" name="login" size="45" value="<c:out value='${user.login}'/>"/>
         </td>
 
     </tr>
 
     <tr>
-        <td><%--@declare id="password"--%><label for="password">password: </label>
-        <input type="text" name="password" size="45" value="<c:out value='${user.password}'/>"/>
+        <td>
+         password:  <input type="text" name="password" size="45" value="<c:out value='${user.password}'/>"/>
         </td>
     </tr>
 
     <tr>
-        <td><%--@declare id="role"--%><label for="role">role: </label>
-        <%--<td><form:input path="role" value="role"/></td>--%>
-        <input type="text" name="role" size="45" value="<c:out value='${user.role}'/>"/>
+        <td>
+         role:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="role" size="45" value="<c:out value='${user.role}'/>"/>
         </td>
     </tr>
 
