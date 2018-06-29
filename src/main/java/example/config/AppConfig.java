@@ -88,4 +88,8 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 				.addResourceLocations("/resources/");
 	}
 
+
+
+
+
 }

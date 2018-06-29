@@ -20,7 +20,30 @@ public class SimpleController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = { "delete-{id}-user"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/login"}, method = RequestMethod.GET)
+    public String userLogin() {
+
+        return "login";
+    }
+
+    @RequestMapping(value = { "/login"}, method = RequestMethod.POST)
+    public String userLoginDo( @RequestParam("username") String name ) {
+        User user = userService.getUserByLogin(name);
+         if(user.getLogin()== null){
+             return "redirect:/login";
+         } else {
+             switch (user.getRole()) {
+                 case "user":
+                     return "redirect:/user{username}";
+                 case "admin":
+                     return "redirect:/list{username}";
+             }
+         }
+
+        return null;
+    }
+
+    @RequestMapping(value = { "/delete-{id}-user"}, method = RequestMethod.GET)
     public String userEdit( @PathVariable("id") Long id ) {
         User user = userService.getUserById(id);
         userService.removeUser(user);
@@ -55,12 +78,25 @@ public class SimpleController {
         return "redirect:/list";
     }
 
-    @RequestMapping(value = { "/","/list"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String usersList(ModelMap model) {
 
         List<User> userList = userService.getAllUsers();
         model.addAttribute("list",userList);
 
         return "main";
+    }
+
+    @RequestMapping(value = { "/"}, method = RequestMethod.GET)
+    public String usersStart(ModelMap model) {
+
+        return "redirect:/login";
+    }
+
+    @RequestMapping(value = { "/user{username}"}, method = RequestMethod.GET)
+    public String userHello(ModelMap modelMap, @PathVariable("username") String name,User user) {
+//        model.addAttribute("user",userService.getUserByLogin(name));
+        modelMap.addAttribute("user",userService.getUserByLogin(name));
+        return "hello";
     }
 }
